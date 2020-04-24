@@ -1,0 +1,31 @@
+r=.927; 
+k=1.8182e8;
+dv=.0038;
+du=2;
+hu=1;
+he=10^3;
+hv=10^4;
+delta=1;
+pm=2.5;
+M=10^4;
+pe=.4;
+de=0.1;
+dt=5e-9;
+omega=2.042;
+b=1000;
+function dxdt=utumor1(t,x)
+xu=x(1);
+xi=x(2);
+xm=x(3);
+xe=x(4);
+xv=x(5);
+dxudt= r*xu*(1-(xu+xi/k))-dv*(xu/(hu+xu))...
+    *xv - du*xu*(xe/(he+xe))
+dxidt=dv*(x(1)/(hu+x(1)))*xv - delta*xi - du*xi*(xe/(he+xe));
+dxmdt= pm*(xv/(hv+xv))*xm*(1-(xm/M))
+dxedt= pe*((xv+xu)/(hv+xv+xu))*xm - de*xe - dt*xu*xe
+dxvdt= delta*b*xi-omega*xv
+
+dxdt=[dxudt;dxidt;dxmdt;dxedt;dxvdt]
+
+end
